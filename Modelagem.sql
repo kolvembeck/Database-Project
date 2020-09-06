@@ -1,0 +1,96 @@
+CREATE DATABASE COMERCIO; 
+
+CREATE TABLE CLIENTE(
+	IDCLIENTE INT PRIMARY KEY AUTO_INCREMENT,
+	NOME VARCHAR(30) NOT NULL,
+	SEXO ENUM('MASCULINO','FEMININO') NOT NULL,
+	EMAIL VARCHAR(50) UNIQUE,
+	CPF VARCHAR(15) UNIQUE
+);
+
+
+CREATE TABLE ENDERECO(
+	IDENRECO INT PRIMARY KEY AUTO_INCREMENT,
+	RUA VARCHAR(30) NOT NULL,
+	BAIRRO VARCHAR(15) NOT NULL,
+	CIDADE VARCHAR(15) NOT NULL,
+	ESTADO CHAR(2) NOT NULL,
+	ID_CLIENTE INT UNIQUE,
+	FOREIGN KEY(ID_CLIENTE)
+	REFERENCES CLIENTE(IDCLIENTE)
+);
+
+CREATE TABLE TELEFONE (
+	IDTELEFONE INT PRIMARY KEY AUTO_INCREMENT,
+	TIPO ENUM('RESIDENCIAL','COMERCIAL','CELULAR') NOT NULL,
+	NUMERO VARCHAR(10) NOT NULL,
+	ID_CLIENTE INT,
+	FOREIGN KEY(ID_CLIENTE)
+	REFERENCES CLIENTE(IDCLIENTE)
+);
+
+
+INSERT INTO CLIENTE VALUES(NULL,'JOAO','MASCULINO','JOAO@GMAIL.COM','123456852');
+INSERT INTO CLIENTE VALUES(NULL,'CARLOS','MASCULINO','CARLOS@GMAIL.COM','156543215');
+INSERT INTO CLIENTE VALUES(NULL,'ANA','FEMININO','ANA@GMAIL.COM','3546542332');
+INSERT INTO CLIENTE VALUES(NULL,'CLARA','FEMININO',NULL,'123245878');
+INSERT INTO CLIENTE VALUES(NULL,'JORGE','MASCULINO','JORGE@GMAIL.COM','785432159');
+INSERT INTO CLIENTE VALUES(NULL,'CELIA','FEMININO','CELIA@GMAIL.COM','324168542');
+
+
++-----------+--------+-----------+------------------+------------+
+| IDCLIENTE | NOME   | SEXO      | EMAIL            | CPF        |
++-----------+--------+-----------+------------------+------------+
+|         1 | JOAO   | MASCULINO | JOAO@GMAIL.COM   | 123456852  |
+|         2 | CARLOS | MASCULINO | CARLOS@GMAIL.COM | 156543215  |
+|         3 | ANA    | FEMININO  | ANA@GMAIL.COM    | 3546542332 |
+|         5 | JORGE  | MASCULINO | JORGE@GMAIL.COM  | 785432159  |
+|         6 | CELIA  | FEMININO  | CELIA@GMAIL.COM  | 324168542  |
+|         8 | CLARA  | FEMININO  | NULL             | 123245878  |
++-----------+--------+-----------+------------------+------------+
+
+
+
+INSERT INTO ENDERECO VALUES(NULL,'RUA ANTONIO SÁ','CENTRO','TERESINA','MG',8);
+INSERT INTO ENDERECO VALUES(NULL,'RUA PEDRO BRITO','PARQUE ALVORADA','SÃO PAULO','SP',2);
+INSERT INTO ENDERECO VALUES(NULL,'RUA DIDIMO CASTELO BRANCO','SÃO JOAQUIM','RIO DE JANEIRO','RJ',3);
+INSERT INTO ENDERECO VALUES(NULL,'RUA MILTON BRANDÃO','JOCKEY','OURO PRETO','MG',5);
+INSERT INTO ENDERECO VALUES(NULL,'RUA PALMITOS','SÃO CRISTOVÃO','PICOS','PI',6);
+INSERT INTO ENDERECO VALUES(NULL,'RUA ZUCA LOPES','MATINHA','TERESINA','ES',1);
+
+
++----------+---------------------------+-----------------+----------------+--------+------------+
+| IDENRECO | RUA                       | BAIRRO          | CIDADE         | ESTADO | ID_CLIENTE |
++----------+---------------------------+-----------------+----------------+--------+------------+
+|        1 | RUA ANTONIO SÁ            | CENTRO          | TERESINA       | MG     |          8 |
+|        2 | RUA PEDRO BRITO           | PARQUE ALVORADA | SÃO PAULO      | SP     |          2 |
+|        3 | RUA DIDIMO CASTELO BRANCO | SÃO JOAQUIM     | RIO DE JANEIRO | RJ     |          3 |
+|        4 | RUA MILTON BRANDÃO        | JOCKEY          | OURO PRETO     | MG     |          5 |
+|        5 | RUA PALMITOS              | SÃO CRISTOVÃO   | PICOS          | PI     |          6 |
+|        6 | RUA ZUCA LOPES            | MATINHA         | TERESINA       | ES     |          1 |
++----------+---------------------------+-----------------+----------------+--------+------------+
+
+
+
+
+INSERT INTO TELEFONE VALUES(NULL,'RESIDENCIAL','25412547',5);
+INSERT INTO TELEFONE VALUES(NULL,'COMERCIAL','32158436',8);
+INSERT INTO TELEFONE VALUES(NULL,'RESIDENCIAL','45421354',5);
+INSERT INTO TELEFONE VALUES(NULL,'CELULAR','54846313',6);
+INSERT INTO TELEFONE VALUES(NULL,'RESIDENCIAL','33254893',5);
+INSERT INTO TELEFONE VALUES(NULL,'CELULAR','156486213',5);
+INSERT INTO TELEFONE VALUES(NULL,'COMERCIAL','13215855',2);
+
++------------+-------------+-----------+------------+
+| IDTELEFONE | TIPO        | NUMERO    | ID_CLIENTE |
++------------+-------------+-----------+------------+
+|          1 | RESIDENCIAL | 25412547  |          5 |
+|          2 | COMERCIAL   | 32158436  |          8 |
+|          3 | RESIDENCIAL | 45421354  |          5 |
+|          4 | CELULAR     | 54846313  |          6 |
+|          5 | RESIDENCIAL | 33254893  |          5 |
+|          6 | CELULAR     | 156486213 |          5 |
+|          7 | COMERCIAL   | 13215855  |          2 |
++------------+-------------+-----------+------------+
+
+
